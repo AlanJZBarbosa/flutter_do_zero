@@ -1,4 +1,5 @@
-import 'package:estudando_do_zero/telas/exercicio_tela.dart';
+import 'package:estudando_do_zero/telas/autenticacao_tela.dart';
+import 'package:estudando_do_zero/telas/exercicio_tela.dart'; 
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: ExercicioTela());
+    return  MaterialApp(home: AutenticacaoTela());
+    
   }
 }

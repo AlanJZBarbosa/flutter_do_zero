@@ -25,45 +25,87 @@ class ExercicioTela extends StatelessWidget {
     ),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Puxada alta Pronada - Treino A')),
+      backgroundColor: Colors.blue,
+      appBar: AppBar(
+        title: Column(
+          children: [
+            Text(exercicio.nome, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(exercicio.treino, style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic)),
+          ],
+        ),
+        centerTitle: true,
+        backgroundColor: const Color(0xff0a6d92),
+        elevation: 0,
+        toolbarHeight: 72.0,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.0)),
+      ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           print('foi clicado');
         },
         child: Icon(Icons.add),
       ),
-      body: Padding(
+      body: Container(
+        margin: const EdgeInsets.all(16.0),
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: ListView(
           children: [
-            ElevatedButton(onPressed: () {},
-            child: Text('Enviar foto'),
-            ),
-            Text(
-              'Como fazer?',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18
+            SizedBox(
+              height: 150,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Enviar foto'),
+                  ),
+                  ElevatedButton(onPressed: () {}, child: const Text('Tirar foto')),
+                ],
               ),
             ),
+            const SizedBox(height: 8), 
             const Text(
-              'Segura com as duas maos na barra, mantem a coluna reta, e puxa'
+              'Como fazer?',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            const Divider(),
+            const SizedBox(height: 8), 
+            Text(exercicio.comoFazer),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Divider(color: Colors.black),
+            ),
             const Text(
               'Como estou me sentindo?',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            const Text(
-              'senti bastande diferença hoje',
+            const SizedBox(height: 8), 
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(sentimentos.length, (index) {
+                SentimentoModelo sentimentoAgora = sentimentos[index];
+                return ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(sentimentoAgora.sentindo), 
+                  subtitle: Text(sentimentoAgora.data),
+                  leading: const Icon(Icons.double_arrow),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    color: Colors.red,
+                    onPressed: () {
+                      print('Deletar ${sentimentoAgora.sentindo}');
+                    },
+                  ),
+                );
+              }),
             ),
           ],
         ),
